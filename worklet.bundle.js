@@ -510,9 +510,57 @@
   });
   var pn = sn(tr());
   var dn = (0, pn.default)();
+  function ho(t2) {
+    dn = (0, pn.default)(t2);
+  }
+  function At() {
+    if (Array.isArray(arguments[0])) {
+      let e = arguments[0];
+      return e[At(0, e.length - 1, true)];
+    } else {
+      let e = arguments[0], n = arguments[1], r = arguments[2] || false, i = dn() * (n - e) + e;
+      return r ? Math.round(i) : i;
+    }
+  }
   var nr = sn(er());
+  function rr(t2) {
+    return t2 * t2;
+  }
+  function mn(t2, e) {
+    return rr(t2[0] - e[0]) + rr(t2[1] - e[1]);
+  }
+  function Ao(t2, e, n) {
+    var r = mn(e, n);
+    if (r === 0)
+      return mn(t2, e);
+    var i = ((t2[0] - e[0]) * (n[0] - e[0]) + (t2[1] - e[1]) * (n[1] - e[1])) / r;
+    return i = Math.max(0, Math.min(1, i)), mn(t2, [e[0] + i * (n[0] - e[0]), e[1] + i * (n[1] - e[1])]);
+  }
+  function ye(t2, e, n) {
+    return Math.sqrt(Ao(t2, e, n));
+  }
   var q = 11102230246251565e-32;
+  var R = 134217729;
   var Kt = (3 + 8 * q) * q;
+  function kt(t2, e, n, r, i) {
+    let s, a, o, l, f = e[0], u = r[0], c = 0, h = 0;
+    u > f == u > -f ? (s = f, f = e[++c]) : (s = u, u = r[++h]);
+    let p = 0;
+    if (c < t2 && h < n)
+      for (u > f == u > -f ? (a = f + s, o = s - (a - f), f = e[++c]) : (a = u + s, o = s - (a - u), u = r[++h]), s = a, o !== 0 && (i[p++] = o); c < t2 && h < n; )
+        u > f == u > -f ? (a = s + f, l = a - s, o = s - (a - l) + (f - l), f = e[++c]) : (a = s + u, l = a - s, o = s - (a - l) + (u - l), u = r[++h]), s = a, o !== 0 && (i[p++] = o);
+    for (; c < t2; )
+      a = s + f, l = a - s, o = s - (a - l) + (f - l), f = e[++c], s = a, o !== 0 && (i[p++] = o);
+    for (; h < n; )
+      a = s + u, l = a - s, o = s - (a - l) + (u - l), u = r[++h], s = a, o !== 0 && (i[p++] = o);
+    return (s !== 0 || p === 0) && (i[p++] = s), p;
+  }
+  function Zt(t2, e) {
+    let n = e[0];
+    for (let r = 1; r < t2; r++)
+      n += e[r];
+    return n;
+  }
   function g(t2) {
     return new Float64Array(t2);
   }
@@ -524,6 +572,27 @@
   var or = g(12);
   var sr = g(16);
   var H = g(4);
+  function So(t2, e, n, r, i, s, a) {
+    let o, l, f, u, c, h, p, d, m, x, _, b, y, w, T, A, C, S, N = t2 - i, v = n - i, M = e - s, j = r - s;
+    w = N * j, h = R * N, p = h - (h - N), d = N - p, h = R * j, m = h - (h - j), x = j - m, T = d * x - (w - p * m - d * m - p * x), A = M * v, h = R * M, p = h - (h - M), d = M - p, h = R * v, m = h - (h - v), x = v - m, C = d * x - (A - p * m - d * m - p * x), _ = T - C, c = T - _, Nt[0] = T - (_ + c) + (c - C), b = w + _, c = b - w, y = w - (b - c) + (_ - c), _ = y - A, c = y - _, Nt[1] = y - (_ + c) + (c - A), S = b + _, c = S - b, Nt[2] = b - (S - c) + (_ - c), Nt[3] = S;
+    let k = Zt(4, Nt), E = To * a;
+    if (k >= E || -k >= E || (c = t2 - N, o = t2 - (N + c) + (c - i), c = n - v, f = n - (v + c) + (c - i), c = e - M, l = e - (M + c) + (c - s), c = r - j, u = r - (j + c) + (c - s), o === 0 && l === 0 && f === 0 && u === 0) || (E = Io * a + Kt * Math.abs(k), k += N * u + j * o - (M * f + v * l), k >= E || -k >= E))
+      return k;
+    w = o * j, h = R * o, p = h - (h - o), d = o - p, h = R * j, m = h - (h - j), x = j - m, T = d * x - (w - p * m - d * m - p * x), A = l * v, h = R * l, p = h - (h - l), d = l - p, h = R * v, m = h - (h - v), x = v - m, C = d * x - (A - p * m - d * m - p * x), _ = T - C, c = T - _, H[0] = T - (_ + c) + (c - C), b = w + _, c = b - w, y = w - (b - c) + (_ - c), _ = y - A, c = y - _, H[1] = y - (_ + c) + (c - A), S = b + _, c = S - b, H[2] = b - (S - c) + (_ - c), H[3] = S;
+    let P = kt(4, Nt, 4, H, ir);
+    w = N * u, h = R * N, p = h - (h - N), d = N - p, h = R * u, m = h - (h - u), x = u - m, T = d * x - (w - p * m - d * m - p * x), A = M * f, h = R * M, p = h - (h - M), d = M - p, h = R * f, m = h - (h - f), x = f - m, C = d * x - (A - p * m - d * m - p * x), _ = T - C, c = T - _, H[0] = T - (_ + c) + (c - C), b = w + _, c = b - w, y = w - (b - c) + (_ - c), _ = y - A, c = y - _, H[1] = y - (_ + c) + (c - A), S = b + _, c = S - b, H[2] = b - (S - c) + (_ - c), H[3] = S;
+    let D = kt(P, ir, 4, H, or);
+    w = o * u, h = R * o, p = h - (h - o), d = o - p, h = R * u, m = h - (h - u), x = u - m, T = d * x - (w - p * m - d * m - p * x), A = l * f, h = R * l, p = h - (h - l), d = l - p, h = R * f, m = h - (h - f), x = f - m, C = d * x - (A - p * m - d * m - p * x), _ = T - C, c = T - _, H[0] = T - (_ + c) + (c - C), b = w + _, c = b - w, y = w - (b - c) + (_ - c), _ = y - A, c = y - _, H[1] = y - (_ + c) + (c - A), S = b + _, c = S - b, H[2] = b - (S - c) + (_ - c), H[3] = S;
+    let I = kt(D, or, 4, H, sr);
+    return sr[I - 1];
+  }
+  function Ot(t2, e, n, r, i, s) {
+    let a = (e - s) * (n - i), o = (t2 - i) * (r - s), l = a - o;
+    if (a === 0 || o === 0 || a > 0 != o > 0)
+      return l;
+    let f = Math.abs(a + o);
+    return Math.abs(l) >= ko * f ? l : -So(t2, e, n, r, i, s, f);
+  }
   var wl = (7 + 56 * q) * q;
   var bl = (3 + 28 * q) * q;
   var jl = (26 + 288 * q) * q * q;
@@ -630,7 +699,638 @@
   var wc = g(1152);
   var lr = Math.pow(2, -52);
   var we = new Uint32Array(512);
+  var Tt = class {
+    static from(e, n = Do, r = qo) {
+      let i = e.length, s = new Float64Array(i * 2);
+      for (let a = 0; a < i; a++) {
+        let o = e[a];
+        s[2 * a] = n(o), s[2 * a + 1] = r(o);
+      }
+      return new Tt(s);
+    }
+    constructor(e) {
+      let n = e.length >> 1;
+      if (n > 0 && typeof e[0] != "number")
+        throw new Error("Expected coords to contain numbers.");
+      this.coords = e;
+      let r = Math.max(2 * n - 5, 0);
+      this._triangles = new Uint32Array(r * 3), this._halfedges = new Int32Array(r * 3), this._hashSize = Math.ceil(Math.sqrt(n)), this._hullPrev = new Uint32Array(n), this._hullNext = new Uint32Array(n), this._hullTri = new Uint32Array(n), this._hullHash = new Int32Array(this._hashSize).fill(-1), this._ids = new Uint32Array(n), this._dists = new Float64Array(n), this.update();
+    }
+    update() {
+      let { coords: e, _hullPrev: n, _hullNext: r, _hullTri: i, _hullHash: s } = this, a = e.length >> 1, o = Infinity, l = Infinity, f = -Infinity, u = -Infinity;
+      for (let v = 0; v < a; v++) {
+        let M = e[2 * v], j = e[2 * v + 1];
+        M < o && (o = M), j < l && (l = j), M > f && (f = M), j > u && (u = j), this._ids[v] = v;
+      }
+      let c = (o + f) / 2, h = (l + u) / 2, p = Infinity, d, m, x;
+      for (let v = 0; v < a; v++) {
+        let M = gn(c, h, e[2 * v], e[2 * v + 1]);
+        M < p && (d = v, p = M);
+      }
+      let _ = e[2 * d], b = e[2 * d + 1];
+      p = Infinity;
+      for (let v = 0; v < a; v++) {
+        if (v === d)
+          continue;
+        let M = gn(_, b, e[2 * v], e[2 * v + 1]);
+        M < p && M > 0 && (m = v, p = M);
+      }
+      let y = e[2 * m], w = e[2 * m + 1], T = Infinity;
+      for (let v = 0; v < a; v++) {
+        if (v === d || v === m)
+          continue;
+        let M = Oo(_, b, y, w, e[2 * v], e[2 * v + 1]);
+        M < T && (x = v, T = M);
+      }
+      let A = e[2 * x], C = e[2 * x + 1];
+      if (T === Infinity) {
+        for (let j = 0; j < a; j++)
+          this._dists[j] = e[2 * j] - e[0] || e[2 * j + 1] - e[1];
+        Pt(this._ids, this._dists, 0, a - 1);
+        let v = new Uint32Array(a), M = 0;
+        for (let j = 0, k = -Infinity; j < a; j++) {
+          let E = this._ids[j];
+          this._dists[E] > k && (v[M++] = E, k = this._dists[E]);
+        }
+        this.hull = v.subarray(0, M), this.triangles = new Uint32Array(0), this.halfedges = new Uint32Array(0);
+        return;
+      }
+      if (Ot(_, b, y, w, A, C) < 0) {
+        let v = m, M = y, j = w;
+        m = x, y = A, w = C, x = v, A = M, C = j;
+      }
+      let S = Po(_, b, y, w, A, C);
+      this._cx = S.x, this._cy = S.y;
+      for (let v = 0; v < a; v++)
+        this._dists[v] = gn(e[2 * v], e[2 * v + 1], S.x, S.y);
+      Pt(this._ids, this._dists, 0, a - 1), this._hullStart = d;
+      let N = 3;
+      r[d] = n[x] = m, r[m] = n[d] = x, r[x] = n[m] = d, i[d] = 0, i[m] = 1, i[x] = 2, s.fill(-1), s[this._hashKey(_, b)] = d, s[this._hashKey(y, w)] = m, s[this._hashKey(A, C)] = x, this.trianglesLen = 0, this._addTriangle(d, m, x, -1, -1, -1);
+      for (let v = 0, M, j; v < this._ids.length; v++) {
+        let k = this._ids[v], E = e[2 * k], P = e[2 * k + 1];
+        if (v > 0 && Math.abs(E - M) <= lr && Math.abs(P - j) <= lr || (M = E, j = P, k === d || k === m || k === x))
+          continue;
+        let D = 0;
+        for (let V = 0, L = this._hashKey(E, P); V < this._hashSize && (D = s[(L + V) % this._hashSize], !(D !== -1 && D !== r[D])); V++)
+          ;
+        D = n[D];
+        let I = D, O;
+        for (; O = r[I], Ot(E, P, e[2 * I], e[2 * I + 1], e[2 * O], e[2 * O + 1]) >= 0; )
+          if (I = O, I === D) {
+            I = -1;
+            break;
+          }
+        if (I === -1)
+          continue;
+        let z = this._addTriangle(I, k, r[I], -1, -1, i[I]);
+        i[k] = this._legalize(z + 2), i[I] = z, N++;
+        let X = r[I];
+        for (; O = r[X], Ot(E, P, e[2 * X], e[2 * X + 1], e[2 * O], e[2 * O + 1]) < 0; )
+          z = this._addTriangle(X, k, O, i[k], -1, i[X]), i[k] = this._legalize(z + 2), r[X] = X, N--, X = O;
+        if (I === D)
+          for (; O = n[I], Ot(E, P, e[2 * O], e[2 * O + 1], e[2 * I], e[2 * I + 1]) < 0; )
+            z = this._addTriangle(O, k, I, -1, i[I], i[O]), this._legalize(z + 2), i[O] = z, r[I] = I, N--, I = O;
+        this._hullStart = n[k] = I, r[I] = n[X] = k, r[k] = X, s[this._hashKey(E, P)] = k, s[this._hashKey(e[2 * I], e[2 * I + 1])] = I;
+      }
+      this.hull = new Uint32Array(N);
+      for (let v = 0, M = this._hullStart; v < N; v++)
+        this.hull[v] = M, M = r[M];
+      this.triangles = this._triangles.subarray(0, this.trianglesLen), this.halfedges = this._halfedges.subarray(0, this.trianglesLen);
+    }
+    _hashKey(e, n) {
+      return Math.floor(Eo(e - this._cx, n - this._cy) * this._hashSize) % this._hashSize;
+    }
+    _legalize(e) {
+      let { _triangles: n, _halfedges: r, coords: i } = this, s = 0, a = 0;
+      for (; ; ) {
+        let o = r[e], l = e - e % 3;
+        if (a = l + (e + 2) % 3, o === -1) {
+          if (s === 0)
+            break;
+          e = we[--s];
+          continue;
+        }
+        let f = o - o % 3, u = l + (e + 1) % 3, c = f + (o + 2) % 3, h = n[a], p = n[e], d = n[u], m = n[c];
+        if (No(i[2 * h], i[2 * h + 1], i[2 * p], i[2 * p + 1], i[2 * d], i[2 * d + 1], i[2 * m], i[2 * m + 1])) {
+          n[e] = m, n[o] = h;
+          let _ = r[c];
+          if (_ === -1) {
+            let y = this._hullStart;
+            do {
+              if (this._hullTri[y] === c) {
+                this._hullTri[y] = e;
+                break;
+              }
+              y = this._hullPrev[y];
+            } while (y !== this._hullStart);
+          }
+          this._link(e, _), this._link(o, r[a]), this._link(a, c);
+          let b = f + (o + 1) % 3;
+          s < we.length && (we[s++] = b);
+        } else {
+          if (s === 0)
+            break;
+          e = we[--s];
+        }
+      }
+      return a;
+    }
+    _link(e, n) {
+      this._halfedges[e] = n, n !== -1 && (this._halfedges[n] = e);
+    }
+    _addTriangle(e, n, r, i, s, a) {
+      let o = this.trianglesLen;
+      return this._triangles[o] = e, this._triangles[o + 1] = n, this._triangles[o + 2] = r, this._link(o, i), this._link(o + 1, s), this._link(o + 2, a), this.trianglesLen += 3, o;
+    }
+  };
+  function Eo(t2, e) {
+    let n = t2 / (Math.abs(t2) + Math.abs(e));
+    return (e > 0 ? 3 - n : 1 + n) / 4;
+  }
+  function gn(t2, e, n, r) {
+    let i = t2 - n, s = e - r;
+    return i * i + s * s;
+  }
+  function No(t2, e, n, r, i, s, a, o) {
+    let l = t2 - a, f = e - o, u = n - a, c = r - o, h = i - a, p = s - o, d = l * l + f * f, m = u * u + c * c, x = h * h + p * p;
+    return l * (c * x - m * p) - f * (u * x - m * h) + d * (u * p - c * h) < 0;
+  }
+  function Oo(t2, e, n, r, i, s) {
+    let a = n - t2, o = r - e, l = i - t2, f = s - e, u = a * a + o * o, c = l * l + f * f, h = 0.5 / (a * f - o * l), p = (f * u - o * c) * h, d = (a * c - l * u) * h;
+    return p * p + d * d;
+  }
+  function Po(t2, e, n, r, i, s) {
+    let a = n - t2, o = r - e, l = i - t2, f = s - e, u = a * a + o * o, c = l * l + f * f, h = 0.5 / (a * f - o * l), p = t2 + (f * u - o * c) * h, d = e + (a * c - l * u) * h;
+    return { x: p, y: d };
+  }
+  function Pt(t2, e, n, r) {
+    if (r - n <= 20)
+      for (let i = n + 1; i <= r; i++) {
+        let s = t2[i], a = e[s], o = i - 1;
+        for (; o >= n && e[t2[o]] > a; )
+          t2[o + 1] = t2[o--];
+        t2[o + 1] = s;
+      }
+    else {
+      let i = n + r >> 1, s = n + 1, a = r;
+      Wt(t2, i, s), e[t2[n]] > e[t2[r]] && Wt(t2, n, r), e[t2[s]] > e[t2[r]] && Wt(t2, s, r), e[t2[n]] > e[t2[s]] && Wt(t2, n, s);
+      let o = t2[s], l = e[o];
+      for (; ; ) {
+        do
+          s++;
+        while (e[t2[s]] < l);
+        do
+          a--;
+        while (e[t2[a]] > l);
+        if (a < s)
+          break;
+        Wt(t2, s, a);
+      }
+      t2[n + 1] = t2[a], t2[a] = o, r - s + 1 >= a - n ? (Pt(t2, e, s, r), Pt(t2, e, n, a - 1)) : (Pt(t2, e, n, a - 1), Pt(t2, e, s, r));
+    }
+  }
+  function Wt(t2, e, n) {
+    let r = t2[e];
+    t2[e] = t2[n], t2[n] = r;
+  }
+  function Do(t2) {
+    return t2[0];
+  }
+  function qo(t2) {
+    return t2[1];
+  }
+  var ur = 1e-6;
+  var K = class {
+    constructor() {
+      this._x0 = this._y0 = this._x1 = this._y1 = null, this._ = "";
+    }
+    moveTo(e, n) {
+      this._ += `M${this._x0 = this._x1 = +e},${this._y0 = this._y1 = +n}`;
+    }
+    closePath() {
+      this._x1 !== null && (this._x1 = this._x0, this._y1 = this._y0, this._ += "Z");
+    }
+    lineTo(e, n) {
+      this._ += `L${this._x1 = +e},${this._y1 = +n}`;
+    }
+    arc(e, n, r) {
+      e = +e, n = +n, r = +r;
+      let i = e + r, s = n;
+      if (r < 0)
+        throw new Error("negative radius");
+      this._x1 === null ? this._ += `M${i},${s}` : (Math.abs(this._x1 - i) > ur || Math.abs(this._y1 - s) > ur) && (this._ += "L" + i + "," + s), !!r && (this._ += `A${r},${r},0,1,1,${e - r},${n}A${r},${r},0,1,1,${this._x1 = i},${this._y1 = s}`);
+    }
+    rect(e, n, r, i) {
+      this._ += `M${this._x0 = this._x1 = +e},${this._y0 = this._y1 = +n}h${+r}v${+i}h${-r}Z`;
+    }
+    value() {
+      return this._ || null;
+    }
+  };
+  var It = class {
+    constructor() {
+      this._ = [];
+    }
+    moveTo(e, n) {
+      this._.push([e, n]);
+    }
+    closePath() {
+      this._.push(this._[0].slice());
+    }
+    lineTo(e, n) {
+      this._.push([e, n]);
+    }
+    value() {
+      return this._.length ? this._ : null;
+    }
+  };
+  var be = class {
+    constructor(e, [n, r, i, s] = [0, 0, 960, 500]) {
+      if (!((i = +i) >= (n = +n)) || !((s = +s) >= (r = +r)))
+        throw new Error("invalid bounds");
+      this.delaunay = e, this._circumcenters = new Float64Array(e.points.length * 2), this.vectors = new Float64Array(e.points.length * 2), this.xmax = i, this.xmin = n, this.ymax = s, this.ymin = r, this._init();
+    }
+    update() {
+      return this.delaunay.update(), this._init(), this;
+    }
+    _init() {
+      let { delaunay: { points: e, hull: n, triangles: r }, vectors: i } = this, s = this.circumcenters = this._circumcenters.subarray(0, r.length / 3 * 2);
+      for (let p = 0, d = 0, m = r.length, x, _; p < m; p += 3, d += 2) {
+        let b = r[p] * 2, y = r[p + 1] * 2, w = r[p + 2] * 2, T = e[b], A = e[b + 1], C = e[y], S = e[y + 1], N = e[w], v = e[w + 1], M = C - T, j = S - A, k = N - T, E = v - A, P = (M * E - j * k) * 2;
+        if (Math.abs(P) < 1e-9) {
+          let D = 1e9, I = r[0] * 2;
+          D *= Math.sign((e[I] - T) * E - (e[I + 1] - A) * k), x = (T + N) / 2 - D * E, _ = (A + v) / 2 + D * k;
+        } else {
+          let D = 1 / P, I = M * M + j * j, O = k * k + E * E;
+          x = T + (E * I - j * O) * D, _ = A + (M * O - k * I) * D;
+        }
+        s[d] = x, s[d + 1] = _;
+      }
+      let a = n[n.length - 1], o, l = a * 4, f, u = e[2 * a], c, h = e[2 * a + 1];
+      i.fill(0);
+      for (let p = 0; p < n.length; ++p)
+        a = n[p], o = l, f = u, c = h, l = a * 4, u = e[2 * a], h = e[2 * a + 1], i[o + 2] = i[l] = c - h, i[o + 3] = i[l + 1] = u - f;
+    }
+    render(e) {
+      let n = e == null ? e = new K() : void 0, { delaunay: { halfedges: r, inedges: i, hull: s }, circumcenters: a, vectors: o } = this;
+      if (s.length <= 1)
+        return null;
+      for (let u = 0, c = r.length; u < c; ++u) {
+        let h = r[u];
+        if (h < u)
+          continue;
+        let p = Math.floor(u / 3) * 2, d = Math.floor(h / 3) * 2, m = a[p], x = a[p + 1], _ = a[d], b = a[d + 1];
+        this._renderSegment(m, x, _, b, e);
+      }
+      let l, f = s[s.length - 1];
+      for (let u = 0; u < s.length; ++u) {
+        l = f, f = s[u];
+        let c = Math.floor(i[f] / 3) * 2, h = a[c], p = a[c + 1], d = l * 4, m = this._project(h, p, o[d + 2], o[d + 3]);
+        m && this._renderSegment(h, p, m[0], m[1], e);
+      }
+      return n && n.value();
+    }
+    renderBounds(e) {
+      let n = e == null ? e = new K() : void 0;
+      return e.rect(this.xmin, this.ymin, this.xmax - this.xmin, this.ymax - this.ymin), n && n.value();
+    }
+    renderCell(e, n) {
+      let r = n == null ? n = new K() : void 0, i = this._clip(e);
+      if (i === null || !i.length)
+        return;
+      n.moveTo(i[0], i[1]);
+      let s = i.length;
+      for (; i[0] === i[s - 2] && i[1] === i[s - 1] && s > 1; )
+        s -= 2;
+      for (let a = 2; a < s; a += 2)
+        (i[a] !== i[a - 2] || i[a + 1] !== i[a - 1]) && n.lineTo(i[a], i[a + 1]);
+      return n.closePath(), r && r.value();
+    }
+    *cellPolygons() {
+      let { delaunay: { points: e } } = this;
+      for (let n = 0, r = e.length / 2; n < r; ++n) {
+        let i = this.cellPolygon(n);
+        i && (i.index = n, yield i);
+      }
+    }
+    cellPolygon(e) {
+      let n = new It();
+      return this.renderCell(e, n), n.value();
+    }
+    _renderSegment(e, n, r, i, s) {
+      let a, o = this._regioncode(e, n), l = this._regioncode(r, i);
+      o === 0 && l === 0 ? (s.moveTo(e, n), s.lineTo(r, i)) : (a = this._clipSegment(e, n, r, i, o, l)) && (s.moveTo(a[0], a[1]), s.lineTo(a[2], a[3]));
+    }
+    contains(e, n, r) {
+      return n = +n, n !== n || (r = +r, r !== r) ? false : this.delaunay._step(e, n, r) === e;
+    }
+    *neighbors(e) {
+      let n = this._clip(e);
+      if (n)
+        for (let r of this.delaunay.neighbors(e)) {
+          let i = this._clip(r);
+          if (i)
+            t:
+              for (let s = 0, a = n.length; s < a; s += 2)
+                for (let o = 0, l = i.length; o < l; o += 2)
+                  if (n[s] == i[o] && n[s + 1] == i[o + 1] && n[(s + 2) % a] == i[(o + l - 2) % l] && n[(s + 3) % a] == i[(o + l - 1) % l]) {
+                    yield r;
+                    break t;
+                  }
+        }
+    }
+    _cell(e) {
+      let { circumcenters: n, delaunay: { inedges: r, halfedges: i, triangles: s } } = this, a = r[e];
+      if (a === -1)
+        return null;
+      let o = [], l = a;
+      do {
+        let f = Math.floor(l / 3);
+        if (o.push(n[f * 2], n[f * 2 + 1]), l = l % 3 == 2 ? l - 2 : l + 1, s[l] !== e)
+          break;
+        l = i[l];
+      } while (l !== a && l !== -1);
+      return o;
+    }
+    _clip(e) {
+      if (e === 0 && this.delaunay.hull.length === 1)
+        return [this.xmax, this.ymin, this.xmax, this.ymax, this.xmin, this.ymax, this.xmin, this.ymin];
+      let n = this._cell(e);
+      if (n === null)
+        return null;
+      let { vectors: r } = this, i = e * 4;
+      return r[i] || r[i + 1] ? this._clipInfinite(e, n, r[i], r[i + 1], r[i + 2], r[i + 3]) : this._clipFinite(e, n);
+    }
+    _clipFinite(e, n) {
+      let r = n.length, i = null, s, a, o = n[r - 2], l = n[r - 1], f, u = this._regioncode(o, l), c, h = 0;
+      for (let p = 0; p < r; p += 2)
+        if (s = o, a = l, o = n[p], l = n[p + 1], f = u, u = this._regioncode(o, l), f === 0 && u === 0)
+          c = h, h = 0, i ? i.push(o, l) : i = [o, l];
+        else {
+          let d, m, x, _, b;
+          if (f === 0) {
+            if ((d = this._clipSegment(s, a, o, l, f, u)) === null)
+              continue;
+            [m, x, _, b] = d;
+          } else {
+            if ((d = this._clipSegment(o, l, s, a, u, f)) === null)
+              continue;
+            [_, b, m, x] = d, c = h, h = this._edgecode(m, x), c && h && this._edge(e, c, h, i, i.length), i ? i.push(m, x) : i = [m, x];
+          }
+          c = h, h = this._edgecode(_, b), c && h && this._edge(e, c, h, i, i.length), i ? i.push(_, b) : i = [_, b];
+        }
+      if (i)
+        c = h, h = this._edgecode(i[0], i[1]), c && h && this._edge(e, c, h, i, i.length);
+      else if (this.contains(e, (this.xmin + this.xmax) / 2, (this.ymin + this.ymax) / 2))
+        return [this.xmax, this.ymin, this.xmax, this.ymax, this.xmin, this.ymax, this.xmin, this.ymin];
+      return i;
+    }
+    _clipSegment(e, n, r, i, s, a) {
+      for (; ; ) {
+        if (s === 0 && a === 0)
+          return [e, n, r, i];
+        if (s & a)
+          return null;
+        let o, l, f = s || a;
+        f & 8 ? (o = e + (r - e) * (this.ymax - n) / (i - n), l = this.ymax) : f & 4 ? (o = e + (r - e) * (this.ymin - n) / (i - n), l = this.ymin) : f & 2 ? (l = n + (i - n) * (this.xmax - e) / (r - e), o = this.xmax) : (l = n + (i - n) * (this.xmin - e) / (r - e), o = this.xmin), s ? (e = o, n = l, s = this._regioncode(e, n)) : (r = o, i = l, a = this._regioncode(r, i));
+      }
+    }
+    _clipInfinite(e, n, r, i, s, a) {
+      let o = Array.from(n), l;
+      if ((l = this._project(o[0], o[1], r, i)) && o.unshift(l[0], l[1]), (l = this._project(o[o.length - 2], o[o.length - 1], s, a)) && o.push(l[0], l[1]), o = this._clipFinite(e, o))
+        for (let f = 0, u = o.length, c, h = this._edgecode(o[u - 2], o[u - 1]); f < u; f += 2)
+          c = h, h = this._edgecode(o[f], o[f + 1]), c && h && (f = this._edge(e, c, h, o, f), u = o.length);
+      else
+        this.contains(e, (this.xmin + this.xmax) / 2, (this.ymin + this.ymax) / 2) && (o = [this.xmin, this.ymin, this.xmax, this.ymin, this.xmax, this.ymax, this.xmin, this.ymax]);
+      return o;
+    }
+    _edge(e, n, r, i, s) {
+      for (; n !== r; ) {
+        let a, o;
+        switch (n) {
+          case 5:
+            n = 4;
+            continue;
+          case 4:
+            n = 6, a = this.xmax, o = this.ymin;
+            break;
+          case 6:
+            n = 2;
+            continue;
+          case 2:
+            n = 10, a = this.xmax, o = this.ymax;
+            break;
+          case 10:
+            n = 8;
+            continue;
+          case 8:
+            n = 9, a = this.xmin, o = this.ymax;
+            break;
+          case 9:
+            n = 1;
+            continue;
+          case 1:
+            n = 5, a = this.xmin, o = this.ymin;
+            break;
+        }
+        (i[s] !== a || i[s + 1] !== o) && this.contains(e, a, o) && (i.splice(s, 0, a, o), s += 2);
+      }
+      if (i.length > 4)
+        for (let a = 0; a < i.length; a += 2) {
+          let o = (a + 2) % i.length, l = (a + 4) % i.length;
+          (i[a] === i[o] && i[o] === i[l] || i[a + 1] === i[o + 1] && i[o + 1] === i[l + 1]) && (i.splice(o, 2), a -= 2);
+        }
+      return s;
+    }
+    _project(e, n, r, i) {
+      let s = Infinity, a, o, l;
+      if (i < 0) {
+        if (n <= this.ymin)
+          return null;
+        (a = (this.ymin - n) / i) < s && (l = this.ymin, o = e + (s = a) * r);
+      } else if (i > 0) {
+        if (n >= this.ymax)
+          return null;
+        (a = (this.ymax - n) / i) < s && (l = this.ymax, o = e + (s = a) * r);
+      }
+      if (r > 0) {
+        if (e >= this.xmax)
+          return null;
+        (a = (this.xmax - e) / r) < s && (o = this.xmax, l = n + (s = a) * i);
+      } else if (r < 0) {
+        if (e <= this.xmin)
+          return null;
+        (a = (this.xmin - e) / r) < s && (o = this.xmin, l = n + (s = a) * i);
+      }
+      return [o, l];
+    }
+    _edgecode(e, n) {
+      return (e === this.xmin ? 1 : e === this.xmax ? 2 : 0) | (n === this.ymin ? 4 : n === this.ymax ? 8 : 0);
+    }
+    _regioncode(e, n) {
+      return (e < this.xmin ? 1 : e > this.xmax ? 2 : 0) | (n < this.ymin ? 4 : n > this.ymax ? 8 : 0);
+    }
+  };
   var Xo = 2 * Math.PI;
+  var Dt = Math.pow;
+  function zo(t2) {
+    return t2[0];
+  }
+  function Ro(t2) {
+    return t2[1];
+  }
+  function Bo(t2) {
+    let { triangles: e, coords: n } = t2;
+    for (let r = 0; r < e.length; r += 3) {
+      let i = 2 * e[r], s = 2 * e[r + 1], a = 2 * e[r + 2];
+      if ((n[a] - n[i]) * (n[s + 1] - n[i + 1]) - (n[s] - n[i]) * (n[a + 1] - n[i + 1]) > 1e-10)
+        return false;
+    }
+    return true;
+  }
+  function Fo(t2, e, n) {
+    return [t2 + Math.sin(t2 + e) * n, e + Math.cos(t2 - e) * n];
+  }
+  var St = class {
+    static from(e, n = zo, r = Ro, i) {
+      return new St("length" in e ? Lo(e, n, r, i) : Float64Array.from(Vo(e, n, r, i)));
+    }
+    constructor(e) {
+      this._delaunator = new Tt(e), this.inedges = new Int32Array(e.length / 2), this._hullIndex = new Int32Array(e.length / 2), this.points = this._delaunator.coords, this._init();
+    }
+    update() {
+      return this._delaunator.update(), this._init(), this;
+    }
+    _init() {
+      let e = this._delaunator, n = this.points;
+      if (e.hull && e.hull.length > 2 && Bo(e)) {
+        this.collinear = Int32Array.from({ length: n.length / 2 }, (h, p) => p).sort((h, p) => n[2 * h] - n[2 * p] || n[2 * h + 1] - n[2 * p + 1]);
+        let l = this.collinear[0], f = this.collinear[this.collinear.length - 1], u = [n[2 * l], n[2 * l + 1], n[2 * f], n[2 * f + 1]], c = 1e-8 * Math.hypot(u[3] - u[1], u[2] - u[0]);
+        for (let h = 0, p = n.length / 2; h < p; ++h) {
+          let d = Fo(n[2 * h], n[2 * h + 1], c);
+          n[2 * h] = d[0], n[2 * h + 1] = d[1];
+        }
+        this._delaunator = new Tt(n);
+      } else
+        delete this.collinear;
+      let r = this.halfedges = this._delaunator.halfedges, i = this.hull = this._delaunator.hull, s = this.triangles = this._delaunator.triangles, a = this.inedges.fill(-1), o = this._hullIndex.fill(-1);
+      for (let l = 0, f = r.length; l < f; ++l) {
+        let u = s[l % 3 == 2 ? l - 2 : l + 1];
+        (r[l] === -1 || a[u] === -1) && (a[u] = l);
+      }
+      for (let l = 0, f = i.length; l < f; ++l)
+        o[i[l]] = l;
+      i.length <= 2 && i.length > 0 && (this.triangles = new Int32Array(3).fill(-1), this.halfedges = new Int32Array(3).fill(-1), this.triangles[0] = i[0], a[i[0]] = 1, i.length === 2 && (a[i[1]] = 0, this.triangles[1] = i[1], this.triangles[2] = i[1]));
+    }
+    voronoi(e) {
+      return new be(this, e);
+    }
+    *neighbors(e) {
+      let { inedges: n, hull: r, _hullIndex: i, halfedges: s, triangles: a, collinear: o } = this;
+      if (o) {
+        let c = o.indexOf(e);
+        c > 0 && (yield o[c - 1]), c < o.length - 1 && (yield o[c + 1]);
+        return;
+      }
+      let l = n[e];
+      if (l === -1)
+        return;
+      let f = l, u = -1;
+      do {
+        if (yield u = a[f], f = f % 3 == 2 ? f - 2 : f + 1, a[f] !== e)
+          return;
+        if (f = s[f], f === -1) {
+          let c = r[(i[e] + 1) % r.length];
+          c !== u && (yield c);
+          return;
+        }
+      } while (f !== l);
+    }
+    find(e, n, r = 0) {
+      if (e = +e, e !== e || (n = +n, n !== n))
+        return -1;
+      let i = r, s;
+      for (; (s = this._step(r, e, n)) >= 0 && s !== r && s !== i; )
+        r = s;
+      return s;
+    }
+    _step(e, n, r) {
+      let { inedges: i, hull: s, _hullIndex: a, halfedges: o, triangles: l, points: f } = this;
+      if (i[e] === -1 || !f.length)
+        return (e + 1) % (f.length >> 1);
+      let u = e, c = Dt(n - f[e * 2], 2) + Dt(r - f[e * 2 + 1], 2), h = i[e], p = h;
+      do {
+        let d = l[p], m = Dt(n - f[d * 2], 2) + Dt(r - f[d * 2 + 1], 2);
+        if (m < c && (c = m, u = d), p = p % 3 == 2 ? p - 2 : p + 1, l[p] !== e)
+          break;
+        if (p = o[p], p === -1) {
+          if (p = s[(a[e] + 1) % s.length], p !== d && Dt(n - f[p * 2], 2) + Dt(r - f[p * 2 + 1], 2) < c)
+            return p;
+          break;
+        }
+      } while (p !== h);
+      return u;
+    }
+    render(e) {
+      let n = e == null ? e = new K() : void 0, { points: r, halfedges: i, triangles: s } = this;
+      for (let a = 0, o = i.length; a < o; ++a) {
+        let l = i[a];
+        if (l < a)
+          continue;
+        let f = s[a] * 2, u = s[l] * 2;
+        e.moveTo(r[f], r[f + 1]), e.lineTo(r[u], r[u + 1]);
+      }
+      return this.renderHull(e), n && n.value();
+    }
+    renderPoints(e, n) {
+      n === void 0 && (!e || typeof e.moveTo != "function") && (n = e, e = null), n = n == null ? 2 : +n;
+      let r = e == null ? e = new K() : void 0, { points: i } = this;
+      for (let s = 0, a = i.length; s < a; s += 2) {
+        let o = i[s], l = i[s + 1];
+        e.moveTo(o + n, l), e.arc(o, l, n, 0, Xo);
+      }
+      return r && r.value();
+    }
+    renderHull(e) {
+      let n = e == null ? e = new K() : void 0, { hull: r, points: i } = this, s = r[0] * 2, a = r.length;
+      e.moveTo(i[s], i[s + 1]);
+      for (let o = 1; o < a; ++o) {
+        let l = 2 * r[o];
+        e.lineTo(i[l], i[l + 1]);
+      }
+      return e.closePath(), n && n.value();
+    }
+    hullPolygon() {
+      let e = new It();
+      return this.renderHull(e), e.value();
+    }
+    renderTriangle(e, n) {
+      let r = n == null ? n = new K() : void 0, { points: i, triangles: s } = this, a = s[e *= 3] * 2, o = s[e + 1] * 2, l = s[e + 2] * 2;
+      return n.moveTo(i[a], i[a + 1]), n.lineTo(i[o], i[o + 1]), n.lineTo(i[l], i[l + 1]), n.closePath(), r && r.value();
+    }
+    *trianglePolygons() {
+      let { triangles: e } = this;
+      for (let n = 0, r = e.length / 3; n < r; ++n)
+        yield this.trianglePolygon(n);
+    }
+    trianglePolygon(e) {
+      let n = new It();
+      return this.renderTriangle(e, n), n.value();
+    }
+  };
+  function Lo(t2, e, n, r) {
+    let i = t2.length, s = new Float64Array(i * 2);
+    for (let a = 0; a < i; ++a) {
+      let o = t2[a];
+      s[a * 2] = e.call(r, o, a, t2), s[a * 2 + 1] = n.call(r, o, a, t2);
+    }
+    return s;
+  }
+  function* Vo(t2, e, n, r) {
+    let i = 0;
+    for (let s of t2)
+      yield e.call(r, s, i, t2), yield n.call(r, s, i, t2), ++i;
+  }
   var Yo = { value: () => {
   } };
   function cr() {
@@ -2068,6 +2768,11 @@
   function On(t2) {
     return { type: t2 };
   }
+  function Bt(t2) {
+    for (var e = -1, n = t2.length, r = 0, i = 0, s, a = t2[n - 1], o, l = 0; ++e < n; )
+      s = a, a = t2[e], l += o = s[0] * a[1] - a[0] * s[1], r += (s[0] + a[0]) * o, i += (s[1] + a[1]) * o;
+    return l *= 3, [r / l, i / l];
+  }
   function pt(t2, e, n) {
     this.k = t2, this.x = e, this.y = n;
   }
@@ -2102,8 +2807,160 @@
         return Pn;
     return t2.__zoom;
   }
+  var $a = { width: 1024, height: 1024, points: [], relaxIterations: 8 };
+  function Qi(t2) {
+    t2 = Object.assign({}, $a, t2), t2.points = t2.points.map((s) => [s.x, s.y]);
+    let e = St.from(t2.points), n = e.voronoi([0, 0, t2.width, t2.height]), r = [];
+    for (let s = 0; s < t2.relaxIterations; s++) {
+      for (let a = 0; a < e.points.length; a += 2) {
+        let o = n.cellPolygon(a >> 1);
+        if (o === null)
+          continue;
+        let l = e.points[a], f = e.points[a + 1], [u, c] = Bt(o);
+        e.points[a] = l + (u - l) * 1, e.points[a + 1] = f + (c - f) * 1;
+      }
+      n.update();
+    }
+    for (let s = 0; s < e.points.length; s += 2) {
+      let a = e.points[s], o = e.points[s + 1];
+      r.push({ x: a, y: o });
+    }
+    let i = [];
+    for (let s = 0; s < e.points.length; s += 2) {
+      let a = n.cellPolygon(s >> 1);
+      a !== null && i.push({ ...Ui(a), neighbors: [...n.neighbors(s)].map((o) => ({ ...Ui(n.cellPolygon(o)) })) });
+    }
+    return { cells: i.map((s, a) => {
+      let o = [...n.neighbors(a)];
+      return s.neighbors = o.map((l) => i[l]), s;
+    }), points: r };
+  }
+  function Ui(t2) {
+    return { points: t2, innerCircleRadius: Qa(t2), centroid: { x: Bt(t2)[0], y: Bt(t2)[1] } };
+  }
+  function Qa(t2) {
+    let e = Bt(t2), n = Ua(e, t2), r = ye(e, n[0], n[1]);
+    for (let i = 1; i < t2.length - 1; i++)
+      if (t2[i + 1]) {
+        let s = ye(e, n[i], n[i + 1]);
+        s < r && (r = s);
+      }
+    return r;
+  }
+  function Ua(t2, e) {
+    let n = t2, r = e.slice(0), i = (s, a) => Math.atan2(s[1] - n[1], s[0] - n[0]) * 180 / Math.PI - Math.atan2(a[1] - n[1], a[0] - n[0]) * 180 / Math.PI;
+    return r.sort(i), r;
+  }
   var Zi = sn(Ki());
   var Ka = { width: 200, height: 200, resolution: 8, xInc: 0.01, yInc: 0.01, seed: Math.random() * 1e3 };
+
+  // node_modules/geometric/src/angles/angleToDegrees.js
+  function angleToDegrees(angle) {
+    return angle * 180 / Math.PI;
+  }
+
+  // node_modules/geometric/src/lines/lineAngle.js
+  function lineAngle(line) {
+    return angleToDegrees(Math.atan2(line[1][1] - line[0][1], line[1][0] - line[0][0]));
+  }
+
+  // node_modules/geometric/src/lines/lineLength.js
+  function lineLength(line) {
+    return Math.sqrt(Math.pow(line[1][0] - line[0][0], 2) + Math.pow(line[1][1] - line[0][1], 2));
+  }
+
+  // node_modules/geometric/src/angles/angleToRadians.js
+  function angleToRadians(angle) {
+    return angle / 180 * Math.PI;
+  }
+
+  // node_modules/geometric/src/points/pointTranslate.js
+  function pointTranslate(point, angle, distance) {
+    const r = angleToRadians(angle);
+    return [point[0] + distance * Math.cos(r), point[1] + distance * Math.sin(r)];
+  }
+
+  // node_modules/geometric/src/polygons/polygonCentroid.js
+  function polygonCentroid(vertices) {
+    let a = 0, x = 0, y = 0, l = vertices.length;
+    for (let i = 0; i < l; i++) {
+      const s = i === l - 1 ? 0 : i + 1, v0 = vertices[i], v1 = vertices[s], f = v0[0] * v1[1] - v1[0] * v0[1];
+      a += f;
+      x += (v0[0] + v1[0]) * f;
+      y += (v0[1] + v1[1]) * f;
+    }
+    const d = a * 3;
+    return [x / d, y / d];
+  }
+
+  // node_modules/geometric/src/polygons/polygonScale.js
+  function polygonScale(polygon2, scale, origin) {
+    if (!origin) {
+      origin = polygonCentroid(polygon2);
+    }
+    let p = [];
+    for (let i = 0, l = polygon2.length; i < l; i++) {
+      const v = polygon2[i], d = lineLength([origin, v]), a = lineAngle([origin, v]);
+      p[i] = pointTranslate(origin, a, d * scale);
+    }
+    return p;
+  }
+
+  // worklet.js
+  var colorProps = [...Array(8)].map((_, i) => `--avatar-color-${i + 1}`);
+  var VoronoiAvatar = class {
+    static get inputProperties() {
+      return [
+        "--avatar-seed",
+        ...colorProps
+      ];
+    }
+    propToString(prop) {
+      return prop.toString().trim();
+    }
+    propToNumber(prop) {
+      return parseFloat(prop);
+    }
+    getDefinedColors(props) {
+      return colorProps.map((key) => this.propToString(props.get(key))).filter((value) => value);
+    }
+    paint(ctx, geometry, props) {
+      const { width, height } = geometry;
+      ctx.fillStyle = "tomato";
+      ctx.fillRect(0, 0, width, height);
+      const seed = this.propToString(props.get("--avatar-seed") || 123456);
+      const colors = this.getDefinedColors(props);
+      console.log({ seed, colors });
+      ho(seed);
+      const points = [...Array(At(4, 24, true))].map(() => {
+        return {
+          x: At(0, width),
+          y: At(0, height)
+        };
+      });
+      const diagram = Qi({ width, height, points });
+      diagram.cells.forEach((cell) => {
+        ctx.fillStyle = At(colors);
+        ctx.strokeStyle = At(colors);
+        if (At(0, 1) > 0.5) {
+          ctx.beginPath();
+          ctx.arc(cell.centroid.x, cell.centroid.y, cell.innerCircleRadius / 2, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          polygon(ctx, polygonScale(cell.points, 0.85));
+          ctx.fill();
+        }
+      });
+    }
+  };
+  function polygon(ctx, points) {
+    ctx.moveTo(points[0][0], points[0][1]);
+    for (let i = 1; i < points.length - 1; i++) {
+      ctx.lineTo(points[i][0], points[i][1]);
+    }
+  }
+  registerPaint("voronoiAvatar", VoronoiAvatar);
 })();
 /**
  * quadtree-js

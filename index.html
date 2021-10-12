@@ -24,10 +24,19 @@
       border-radius: 50%;
       border: 6px solid #000;
       background-color: #fff;
+	  --avatar-seed: 'George Francis';
+	  --avatar-color-1: black;
+	  --avatar-color-2: white;
+	  --avatar-color-3: orange;
+	  background-image: paint(voronoiAvatar);
+
     }
   </style>
 </head>
 <body>
   <div class="worklet-canvas"></div>
+  <script>
+	  CSS.paintWorklet.addModule('./worklet.bundle.js');
+  </script>
 </body>
 </html>
